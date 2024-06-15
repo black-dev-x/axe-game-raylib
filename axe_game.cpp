@@ -3,38 +3,53 @@
 int main()
 {
   // window dimensions
-  int width = 350;
-  int height = 200;
+  int width = 800;
+  int height = 450;
 
-  // c
-  int circleX = 100;
-  int circleY = 100;
-  int circleRadius = 50;
-  int speed = 1;
+  // circle
+  int circleX = 200;
+  int circleY = 200;
+  int circleRadius = 25;
+  int circleSpeed = 1;
 
-  InitWindow(width, height, "oh well");
+  // rectangle
+  int rectangleWidth = 50;
+  int rectangleHeight = 50;
+  int rectangleY = 0;
+  int rectangleX = 300;
+  int rectangleSpeed = 10;
+
+  InitWindow(width, height, "Axe Game");
   
   SetTargetFPS(60);
   while(!WindowShouldClose()){
     BeginDrawing();
     ClearBackground(WHITE);
+    DrawCircle(circleX, circleY, circleRadius, BLUE);
+    DrawRectangle(rectangleX, rectangleY, rectangleWidth, rectangleHeight, RED);
+
+    rectangleY += rectangleSpeed;
+    if(rectangleY > height - rectangleHeight || rectangleY < 0)
+    {
+      rectangleSpeed *= -1;
+    }
     if(IsKeyDown(KEY_D) && circleX < width - circleRadius)
     {
-      circleX += speed;
+      circleX += circleSpeed;
     } 
     else if(IsKeyDown(KEY_A) && circleX > circleRadius)
     {
-      circleX -= speed;
+      circleX -= circleSpeed;
     }
     if(IsKeyDown(KEY_W) && circleY > circleRadius)
     {
-      circleY -= speed;
+      circleY -= circleSpeed;
     }
     else if(IsKeyDown(KEY_S) && circleY < height - circleRadius)
     {
-      circleY += speed;
+      circleY += circleSpeed;
     }
-    DrawCircle(circleX, circleY, circleRadius, BLUE);
+    
     EndDrawing();
   }
 }
